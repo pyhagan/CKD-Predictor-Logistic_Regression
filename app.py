@@ -57,7 +57,7 @@ def diet_plan(result):
         """
     return diet_suggestion
     
-@app.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['GET','POST'])
 def predict():
     try:
         data = request.json
