@@ -5,6 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 
+app = Flask(__name__)
 
 # Load the dataset and prepare it
 ckd = pd.read_csv('kidney_disease_complete_2c.csv')
@@ -18,14 +19,6 @@ X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, stratif
 # Train the model
 model = LogisticRegression()
 model.fit(X_train, Y_train)
-
-# Create Flask app
-app = Flask(__name__)
-
-@app.route('/')
-def home():
-    return "Welcome to the CKD Prediction API!"
-
 
 def diet_plan(result):
     if result == "The patient is likely suffering from CKD":
@@ -56,7 +49,7 @@ def diet_plan(result):
         - Avoid excessive amounts of sugar and saturated fats.
         """
     return diet_suggestion
-    
+# Create Flask app    
 @app.route('/predict', methods=['GET','POST'])
 def predict():
     try:
